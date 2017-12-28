@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import com.test.dao.master.TestMapper;
 import com.test.service.TestService;
 
-import lombok.Data;
-
 @Service
 public class TestServiceImpl implements TestService {
 	private TestMapper testMapper;
@@ -92,8 +90,11 @@ public class TestServiceImpl implements TestService {
 	public String saveHtmlInfo(String url) {
 		// TODO Auto-generated method stub
 		String htmlString  = getPageContent(url, "post", 100500);
-		Date now = new Date();
-		testMapper.saveHtmlInfo(url,htmlString,now);
+		long time = new Date().getTime();
+		if (htmlString == null ) {
+			htmlString ="";
+		}
+		testMapper.saveHtmlInfo(url,htmlString,time);
 		return htmlString;
 	}
 	
